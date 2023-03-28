@@ -1,24 +1,21 @@
-//import { Message } from "@mui/icons-material";
 import { useState, useCallback, memo } from "react";
 import PropTypes from "prop-types";
 import styles from "./styles.module.scss";
-// import ModalHeaderContainer from "./Modal/ModalHeaderContainer";
-//import styles from ".Header/"
 
 
 type HeaderProps = {
-    // modalHeaderIsActive: boolean;
+    modalHeaderIsActive: boolean;
+    buttonHendler: any //c ts не работала основательно, использовать any очень сомнительно, поэтому подумаю, какой тип тут лкчше использовать
 };
 
 
 const HeaderView = (props: HeaderProps) => {
     return (
         <div className={styles.box}>
-            {/* <ModalHeaderContainer/> */}
             <div>3 the mist popular points</div>
             <div>134,32 USD +2,38 (1,80 %)</div>
             <div>
-                <button>Briefcase</button>
+                <button onClick={props.buttonHendler}>Briefcase</button>
             </div>
 
         </div>
@@ -26,7 +23,8 @@ const HeaderView = (props: HeaderProps) => {
   
 }
 HeaderView.propTypes = {
-  //modalHeaderIsActive: PropTypes.bool.isRequired
+  modalHeaderIsActive: PropTypes.bool,
+  buttonHendler: PropTypes.any
 };
 
 export default memo(HeaderView);

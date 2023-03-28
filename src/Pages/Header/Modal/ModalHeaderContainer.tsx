@@ -1,19 +1,11 @@
 import { useState, useCallback, memo } from "react";
 import ModalHeaderView from "./ModalHeaderView";
 
-
-// interface Props {
-//     isActive: boolean;
-// }
-
-
 const ModalHeaderViewContainer = () => {
-    //const [isActive, setIsActive] = useState<boolean>(true);
-    const isActive = true;
-    let a = 8;
+    const [isActive, setIsActive] = useState<boolean>(false);
   
     return (
-        <ModalHeaderView isActive={isActive} num={a}/>
+        <ModalHeaderView isActive={isActive}/>
   );
 }
 

@@ -10,19 +10,18 @@ interface Props {
 
 
 const HeaderContainer = () => {
-    const mes = "hello";
-    const[modalHeaderIsActive, setModalHeaderIsActive] = useState<boolean>(true);
+    const[modalHeaderIsActive, setModalHeaderIsActive] = useState<boolean>(false);
+    const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        console.log("click")
+        setModalHeaderIsActive(!modalHeaderIsActive);
+        console.log(modalHeaderIsActive);
+    };
     return (
         <div>
-        <ModalHeaderView isActive={modalHeaderIsActive} num={8}/>
-        <HeaderView/>
+        <ModalHeaderView isActive={modalHeaderIsActive}/>
+        <HeaderView modalHeaderIsActive={modalHeaderIsActive} buttonHendler={buttonHandler}/>
         </div>
-    
-    //   <BubbleView
-    //     arraySize={arraySize}
-    //     //speed={speed}
-    //   />
-
   );
 }
 

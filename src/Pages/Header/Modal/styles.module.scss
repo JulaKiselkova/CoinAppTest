@@ -1,5 +1,35 @@
+$backgroundColor: #86de9e;
+
 .box {
-    background-color: red;
-    height: 100px;
-    width: 100px;
+    background-color: $backgroundColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 30%;
 }
+
+.list{
+    display: inline;
+    float: left;
+}
+.item {
+    background-color: blue;
+}
+
+
+.box_hidden{
+    opacity: 0;
+}
+
+// @mixin box2($direction: false) {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     position: absolute;
+//     background-color: lightpink;
+
+//     @if $direction {
+//         flex-direction: column;
+//     }
+// }

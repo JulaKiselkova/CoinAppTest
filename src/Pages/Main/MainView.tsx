@@ -1,8 +1,5 @@
-//import { Message } from "@mui/icons-material";
 import { useState, useCallback, memo } from "react";
 import PropTypes from "prop-types";
-//import styles from "./styles.module.css"
-
 
 type MainProps = {
     message: string;
