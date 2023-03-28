@@ -1,0 +1,13 @@
+$headerColor: #71beee;
+
+@mixin flexible () {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    @include flexible ();
+    background-color: $headerColor;
+    height: 100px;
+}
