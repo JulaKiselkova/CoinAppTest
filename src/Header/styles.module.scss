@@ -1,0 +1,46 @@
+$headerColor: #71beee;
+$backgroundColor: #86de9e;
+$backgroundModalColor: white;
+$borderFillColor: #dde3ec;
+$borderColor: #536387;
+$borderFocus: #6a64f1;
+
+@mixin flexible() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  @include flexible();
+  background-color: $headerColor;
+  height: 100px;
+}
+
+.list {
+  display: inline-block;
+}
+
+.item {
+  display: inline;
+  margin-right: 10px;
+}
+
+.portflio_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 13px 25px;
+  margin-left: 20px;
+  border: none;
+  font-weight: 500;
+  background-color: $borderFocus;
+  color: $backgroundModalColor;
+  cursor: pointer;
+}
+
+.portflio_btn:hover {
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);
+}

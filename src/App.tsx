@@ -1,14 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import HeaderContainer from './Pages/Header/HeaderContainer';
-import MainContainer from './Pages/Main/MainContainer';
-import './App.css';
+import HeaderContainer from "./Header/HeaderContainer";
+import MainContainer from "./Pages/Main/MainContainer";
+//import {BrowserRouter} from "react-router-dom";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <HeaderContainer/>
-      <MainContainer/>
+      <HeaderContainer />
+      <MainContainer />
     </div>
   );
 }
