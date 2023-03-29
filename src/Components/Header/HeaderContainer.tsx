@@ -1,7 +1,8 @@
+import { createContext } from "react";
 import { useState, memo } from "react";
 import HeaderView from "./HeaderView";
-import ModalHeaderView from "./Modal/ModalHeaderView";
-import ModalHeaderContainer from "./Modal/ModalHeaderContainer";
+import ModalHeaderView from "../Modals/ModalPortfolio/ModalHeaderView";
+import ModalHeaderContainer from "../Modals/ModalPortfolio/ModalHeaderContainer";
 
 const HeaderContainer = () => {
   const [modalHeaderIsActive, setModalHeaderIsActive] =
