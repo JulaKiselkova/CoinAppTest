@@ -1,0 +1,79 @@
+$backgroundColor: #86de9e;
+$backgroundModalColor: white;
+$borderFillColor: #dde3ec;
+$borderColor: #536387;
+$borderFocus: #6a64f1;
+$moneyColor: #5ecb94;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.main_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  width: 50%;
+  margin: 0 auto;
+  border: 1px solid $borderColor;
+  border-radius: 10px;
+}
+
+.box_wrapper {
+  margin: 0 auto;
+  max-width: 550px;
+  width: 100%;
+  background: $backgroundModalColor;
+}
+
+.infoBox {
+  width: 100%;
+  padding: 13px 22px;
+  border-radius: 6px;
+  border: 1px solid $borderColor;
+  background: $backgroundModalColor;
+  color: $borderColor;
+  outline: none;
+  resize: none;
+}
+
+.info {
+  font-size: 12px;
+  color: $moneyColor;
+}
+
+.name:hover {
+  transition: 1s;
+  color: palevioletred;
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.item {
+  margin-top: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.formbold_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 13px 25px;
+  border: none;
+  font-weight: 500;
+  background-color: $borderFocus;
+  color: $backgroundModalColor;
+  cursor: pointer;
+}
+
+.formbold_btn:hover {
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.5);
+}
