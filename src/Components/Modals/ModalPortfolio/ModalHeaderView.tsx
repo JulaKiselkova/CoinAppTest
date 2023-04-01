@@ -1,5 +1,5 @@
 import { useState, useCallback, memo } from "react";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 
 type ModalHeaderProps = {
   isActive: boolean;

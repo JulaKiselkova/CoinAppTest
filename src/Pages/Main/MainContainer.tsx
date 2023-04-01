@@ -3,8 +3,12 @@ import MainView from "./MainView";
 import ModalMainContainer from "../../Components/Modals/ModalAdd/ModalMainContainer";
 import ModalMainView from "../../Components/Modals/ModalAdd/ModalMainView";
 import { ICurrency } from "../../Types/types";
+import { getData } from "../../DataFetching/getData";
+import ReactPaginate from "react-paginate";
+import PaginationContainer from "../../Components/Pagination/PaginationContainer";
 
 const MainContainer = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [modalMainIsActive, setModalMainIsActive] = useState<boolean>(false);
   const [coins, setCoins] = useState<Array<ICurrency>>([]);
 
@@ -15,24 +19,21 @@ const MainContainer = () => {
 
   useEffect(() => {
     const fetchCoins = async () => {
-      const res = await fetch(`https://api.coincap.io/v2/assets?limit=10`);
-      const data = await res.json();
-      const arrOfCoinObjects = data.data;
-      console.log(arrOfCoinObjects);
-      setCoins(arrOfCoinObjects);
+      const res: Array<ICurrency> = await getData();
+      setCoins(res);
     };
-
     fetchCoins();
   }, []);
-  //проблема Handler. У меня копипаст. Один и тот же Handler опрделен и в модалке и в основном меню
   return (
     <div>
       <ModalMainView isActive={false} />
+
       <MainView
         modalMainIsActive={modalMainIsActive}
         coins={coins}
         buttonAddHendler={buttonAddHandler}
       />
+      <PaginationContainer />
     </div>
   );
 };

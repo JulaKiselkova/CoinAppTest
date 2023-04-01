@@ -1,5 +1,5 @@
 import { useState, useCallback, memo } from "react";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 
