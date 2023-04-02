@@ -4,6 +4,7 @@ import styles from "../styles.module.scss";
 type ModalHeaderProps = {
   isActive: boolean;
   buttonDeleteHandler: any;
+  //context: any;
 };
 
 const ModalHeaderView = (props: ModalHeaderProps) => {

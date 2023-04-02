@@ -3,7 +3,8 @@ import HeaderContainer from "./Components/Header/HeaderContainer";
 import MainContainer from "./Pages/Main/MainContainer";
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./Routes/routes";
-import "./App.css";
+//export const MyContext = createContext("default");
+//import "./App.css";
 
 function App() {
   return (
