@@ -4,11 +4,15 @@ import InfoContainer from "../Info/InfoContainer";
 import { ICurrency } from "../../Types/types";
 import { Link } from "react-router-dom";
 import ModalMainView from "../../Components/Modals/ModalAdd/ModalMainView";
+import ModalMainContainer from "../../Components/Modals/ModalAdd/ModalMainContainer";
 
 type MainProps = {
   modalMainIsActive: boolean;
-  coins: Array<ICurrency>;
-  buttonAddHendler: React.MouseEventHandler<HTMLButtonElement>; //c ts не работала основательно, использовать any очень сомнительно, поэтому подумаю, какой тип тут лкчше использовать
+  coins: ICurrency[];
+  setModalMainIsActive: (isActive: boolean) => void;
+  addHandler: (coin: ICurrency) => void;
+  certainCoin: ICurrency;
+  setCertainCoin: Function;
 };
 
 const MainView = (props: MainProps) => {
@@ -16,20 +20,26 @@ const MainView = (props: MainProps) => {
     <div>
       <div className={styles.main_wrapper}>
         <div className={styles.box_wrapper}>
-          {props.coins.map(({ id, name, priceUsd }) => (
-            <div key={id} className={styles.item}>
-              <ModalMainView isActive={props.modalMainIsActive} />
+          <ModalMainContainer
+            isActive={props.modalMainIsActive}
+            coin={props.certainCoin}
+          />
+          {props.coins.map((coin: ICurrency) => (
+            <div key={coin.id} className={styles.item}>
               <div className={styles.infoBox}>
-                <Link className={styles.name} to={`/${name}`}>
-                  {name}
+                <Link className={styles.name} to={`/${coin.name}`}>
+                  {coin.name}
                 </Link>
-                <p className={styles.info}>{priceUsd} $</p>
+                <p className={styles.info}>
+                  {coin.priceUsd} $ {coin.rank}
+                </p>
               </div>
               <button
-                onClick={props.buttonAddHendler}
+                onClick={() => props.addHandler(coin)}
                 className={styles.formbold_btn}
               >
-                +
+                {" "}
+                {props.certainCoin.name}
               </button>
             </div>
           ))}

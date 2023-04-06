@@ -4,9 +4,6 @@ import { ICurrency } from "../Types/types";
 
 export const BASE_URL = `https://api.coincap.io/v2/assets?`;
 
-//export const [firstList, setFirstList] = useState<Array<ICurrency>>([]);
-//export const firstList: Array<ICurrency> = [];
-
 export const getData = async (limit: number) => {
   const res = await fetch(`${BASE_URL}limit=${limit}`);
   const data = await res.json();
@@ -28,10 +25,6 @@ export const getTopThreeCoins = async () => {
 
 export const firstCoins = async (num: number) => {
   const res: Array<ICurrency> = await getDataPaginate(num, 10);
-  //   res.forEach(function (value) {
-  //     //firstList.push(value);
-  //   });
   console.log(res);
   return res;
 };
-//export const res: Array<ICurrency> = await getDataPaginate(10, 0);

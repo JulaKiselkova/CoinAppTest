@@ -11,6 +11,7 @@ import { ROUTE_NAMES } from "./routeNames";
 import MainContainer from "../Pages/Main/MainContainer";
 import InfoContainer from "../Pages/Info/InfoContainer";
 import { useNavigate } from "react-router-dom";
+import { defaultCoin } from "../Types/types";
 
 export const Router = () => {
   const coinName = window.location.pathname.split("/")[1];
@@ -21,6 +22,7 @@ export const Router = () => {
   const MainContext = createContext("default");
 
   return (
+    //определить контекст тут?
     <Routes>
       {/* <MainContext.Provider value="Hello))"> */}
       <Route path={ROUTE_NAMES.HOME_PAGE} element={<MainContainer />} />
@@ -29,7 +31,7 @@ export const Router = () => {
         path={ROUTE_NAMES.COIN_DETAILS}
         element={
           <div>
-            <InfoContainer />
+            <InfoContainer coin={defaultCoin}/>
             {coinName}
           </div>
         }

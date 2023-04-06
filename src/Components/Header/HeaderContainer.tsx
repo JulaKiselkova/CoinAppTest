@@ -40,7 +40,7 @@ const HeaderContainer = () => {
       <ModalHeaderContainer isActive={modalHeaderIsActive} />
       <HeaderView
         modalHeaderIsActive={modalHeaderIsActive}
-        buttonHendler={buttonHandler}
+        buttonHandler={buttonHandler}
         topThree={topThreeCoins}
       />
     </div>
