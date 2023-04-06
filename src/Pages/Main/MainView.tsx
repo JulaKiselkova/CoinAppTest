@@ -3,11 +3,12 @@ import styles from "./styles.module.scss";
 import InfoContainer from "../Info/InfoContainer";
 import { ICurrency } from "../../Types/types";
 import { Link } from "react-router-dom";
+import ModalMainView from "../../Components/Modals/ModalAdd/ModalMainView";
 
 type MainProps = {
   modalMainIsActive: boolean;
   coins: Array<ICurrency>;
-  buttonAddHendler: any; //c ts не работала основательно, использовать any очень сомнительно, поэтому подумаю, какой тип тут лкчше использовать
+  buttonAddHendler: React.MouseEventHandler<HTMLButtonElement>; //c ts не работала основательно, использовать any очень сомнительно, поэтому подумаю, какой тип тут лкчше использовать
 };
 
 const MainView = (props: MainProps) => {
@@ -17,6 +18,7 @@ const MainView = (props: MainProps) => {
         <div className={styles.box_wrapper}>
           {props.coins.map(({ id, name, priceUsd }) => (
             <div key={id} className={styles.item}>
+              <ModalMainView isActive={props.modalMainIsActive} />
               <div className={styles.infoBox}>
                 <Link className={styles.name} to={`/${name}`}>
                   {name}

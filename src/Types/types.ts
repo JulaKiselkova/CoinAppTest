@@ -12,4 +12,8 @@ export interface ICurrency {
   volumeUsd24Hr: number;
   vwap24Hr: number;
   count: number;
+};
+
+export interface IPageNumber {
+  selected: number;
 }
