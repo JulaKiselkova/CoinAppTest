@@ -1,23 +1,27 @@
-import { useState, useCallback, memo } from "react";
+import { memo, useContext } from "react";
 import styles from "../styles.module.scss";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ICurrency } from "../../../Types/types";
+import { MainContext } from "../../../Context/Context";
+import { MainAction } from "../../../Action/action";
 
 type ModalAddProps = {
   isActive: boolean;
   buttonCloseHandler: () => void;
   value: number;
   onChange: (event: React.FormEvent<HTMLInputElement>) => void;
-  onSubmit: any; // как определить этот тип
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   coin: ICurrency;
 };
 
 const ModalMainView = (props: ModalAddProps) => {
+  const MyContext = useContext(MainContext);
+  //console.log(MyContext);
   return (
     <form onSubmit={props.onSubmit}>
       <div className={props.isActive ? styles.main_wrapper : styles.hidden}>
-        {props.coin.name}
+        <p className={styles.title}>Add {props.coin.name}</p>
         <Button
           className="btn"
           variant="contained"
@@ -25,6 +29,13 @@ const ModalMainView = (props: ModalAddProps) => {
           onClick={props.buttonCloseHandler}
         >
           Close
+        </Button>
+        <Button
+          onClick={() =>
+            MyContext.dispatch({ type: MainAction.AddClick, payload: 5 })
+          }
+        >
+          {MyContext.state.test}
         </Button>
         <div className={styles.box_wrapper}>
           <div className={styles.item}>
@@ -35,10 +46,9 @@ const ModalMainView = (props: ModalAddProps) => {
               value={props.value}
               onChange={props.onChange}
             />
-            <p className={styles.info}>Some info</p>
             <button
               className={styles.formbold_btn}
-              onSubmit={() => props.onSubmit()}
+              type="submit"
             >
               Add
             </button>

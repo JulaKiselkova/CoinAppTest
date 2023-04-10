@@ -12,7 +12,7 @@ type InfoProps = {
 const InfoView = (props: InfoProps) => {
   return (
     <>
-      <div>INFO {props.coin.name}</div>;
+      <div>INFO {props.coin.name}</div>
     </>
   );
 };

@@ -1,3 +1,5 @@
+import { MainAction } from "../Action/action";
+
 export interface ICurrency {
   changePercent24Hr: string;
   explorer: string;
@@ -33,3 +35,19 @@ export const defaultCoin: ICurrency = {
   vwap24Hr: 1,
   count: 1,
 };
+
+export interface GlobalContent {
+  addModalIsActive: boolean;
+  test: string;
+  //setCopy: (c: string) => void;
+}
+
+export interface Action {
+  type: MainAction;
+  payload: number;
+}
+
+export interface AppContext {
+  state: GlobalContent;
+  dispatch: React.Dispatch<any>;
+}

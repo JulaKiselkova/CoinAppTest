@@ -12,9 +12,9 @@ type ModalProps = {
   isActive: boolean;
 };
 
-export const PortfolioModalContext = createContext("default Modal Portfolio");
-
 const ModalHeaderViewContainer = (props: ModalProps) => {
+  const [coinName, setCoinName] = useState<string>("");
+
   const buttonDeleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log("delete FROM Modal");

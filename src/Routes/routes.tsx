@@ -5,13 +5,17 @@ import {
   memo,
   createContext,
   useContext,
+  useReducer,
 } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ROUTE_NAMES } from "./routeNames";
 import MainContainer from "../Pages/Main/MainContainer";
 import InfoContainer from "../Pages/Info/InfoContainer";
 import { useNavigate } from "react-router-dom";
-import { defaultCoin } from "../Types/types";
+import { defaultCoin, GlobalContent, AppContext } from "../Types/types";
+import { MainContext, MainContext2 } from "../Context/Context";
+import { MainReducer } from "../Reducer/MainReducer";
+import { MainAction } from "../Action/action";
 
 export const Router = () => {
   const coinName = window.location.pathname.split("/")[1];
@@ -19,20 +23,15 @@ export const Router = () => {
   const navigate = useNavigate();
   navigate(0);
 
-  const MainContext = createContext("default");
-
   return (
-    //определить контекст тут?
     <Routes>
-      {/* <MainContext.Provider value="Hello))"> */}
       <Route path={ROUTE_NAMES.HOME_PAGE} element={<MainContainer />} />
-      {/* </MainContext.Provider> */}
       <Route
         path={ROUTE_NAMES.COIN_DETAILS}
         element={
           <div>
-            <InfoContainer coin={defaultCoin}/>
-            {coinName}
+            <InfoContainer coin={defaultCoin} />
+            это коин из ссылки {coinName}, а вверху дефолтный
           </div>
         }
       />

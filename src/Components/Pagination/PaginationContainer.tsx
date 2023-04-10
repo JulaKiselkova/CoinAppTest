@@ -17,9 +17,9 @@ const PaginationContainer = () => {
     []
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [theLastPage, setTheLastPage] = useState<number>(232);
+  const [theLastPage, setTheLastPage] = useState<number>(231);
+
   const limit = 10;
-  let a: Array<number> = [];
 
   const handlePageClick = async (data: IPageNumber) => {
     setCurrentPage(data.selected);

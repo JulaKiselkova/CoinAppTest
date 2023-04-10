@@ -35,13 +35,12 @@ const MainContainer = () => {
   }, []);
 
   const addHandler = (coin: ICurrency) => {
-    console.log(certainCoin);
     setCertainCoin(coin);
-    console.log(certainCoin);
-
     console.log("Its id", coin.id);
     setModalMainIsActive(!modalMainIsActive);
   };
+
+
   return (
     <div>
       <MainView

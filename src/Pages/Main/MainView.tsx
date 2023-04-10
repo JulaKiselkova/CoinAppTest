@@ -12,7 +12,7 @@ type MainProps = {
   setModalMainIsActive: (isActive: boolean) => void;
   addHandler: (coin: ICurrency) => void;
   certainCoin: ICurrency;
-  setCertainCoin: Function;
+  setCertainCoin: (coin: ICurrency) => void;
 };
 
 const MainView = (props: MainProps) => {
@@ -38,7 +38,7 @@ const MainView = (props: MainProps) => {
                 onClick={() => props.addHandler(coin)}
                 className={styles.formbold_btn}
               >
-                {" "}
+                {"Add "}
                 {props.certainCoin.name}
               </button>
             </div>

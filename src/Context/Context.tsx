@@ -1,9 +1,15 @@
 import { createContext, useContext } from "react";
-import { ICurrency } from "../Types/types";
+import { ICurrency, GlobalContent, AppContext } from "../Types/types";
 import { getData, getDataPaginate, firstCoins } from "../DataFetching/getData";
 
-interface ProviderProps {
-  currentPage: String;
-}
+const initialState = {
+  addModalIsActive: true,
+  test: "without provider",
+};
 
-export const MainContext = createContext<Partial<Array<ICurrency>>>([]);
+export const MainContext2 = createContext("without provider");
+
+export const MainContext = createContext<AppContext>({
+  state: initialState,
+  dispatch: () => null,
+});
