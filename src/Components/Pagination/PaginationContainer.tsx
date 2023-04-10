@@ -17,9 +17,9 @@ const PaginationContainer = () => {
     []
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [theLastPage, setTheLastPage] = useState<number>(232);
+  const [theLastPage, setTheLastPage] = useState<number>(231);
+
   const limit = 10;
-  let a: Array<number> = [];
 
   const handlePageClick = async (data: IPageNumber) => {
     setCurrentPage(data.selected);
@@ -31,32 +31,7 @@ const PaginationContainer = () => {
     return res;
   };
 
-  //   const getTheLastPage = async () => {
-  //     for (let i = 0; !isEmpty; i = i + 10) {
-  //       const res: Array<ICurrency> = await getDataPaginate(limit, i);
-  //       a.push(i);
-  //       if (res.length === 0) {
-  //         console.log(`${i} page with empty data`);
-  //         console.log(`${i - 1} THE LAST NOT EMPTY`);
-  //         return i - 1;
-  //       } else {
-  //         return i;
-  //       }
-  //     }
-  //   };
-
-  //   const handlePageClick = async (data: IPageNumber) => {
-  //     setCurrentPage(data.selected);
-  //     const offset = currentPage * limit;
-  //     const res: Array<ICurrency> = await getDataPaginate(limit, offset);
-  //     //setCertainCoinsList(res);
-  //     console.log(data.selected);
-  //     //console.log(res);
-  //     return res;
-  //   };
-
   return (
-    // <MainContext.Provider value={coins}>
     <>
       <ReactPaginate
         previousLabel={"previous"}
@@ -77,7 +52,6 @@ const PaginationContainer = () => {
         activeClassName={styles.active}
       />
     </>
-    // </MainContext.Provider>
   );
 };
 

@@ -26,21 +26,16 @@ const HeaderContainer = () => {
     const fetchCoins = async () => {
       const res: Array<ICurrency> = await getTopThreeCoins();
       setTopThreeCoins(res);
-      console.log(res);
     };
     fetchCoins();
   }, []);
 
   return (
     <div>
-      {/* <ModalHeaderView
-        isActive={modalHeaderIsActive}
-        buttonDeleteHandler={buttonDeleteHandler}
-      /> */}
       <ModalHeaderContainer isActive={modalHeaderIsActive} />
       <HeaderView
         modalHeaderIsActive={modalHeaderIsActive}
-        buttonHendler={buttonHandler}
+        buttonHandler={buttonHandler}
         topThree={topThreeCoins}
       />
     </div>

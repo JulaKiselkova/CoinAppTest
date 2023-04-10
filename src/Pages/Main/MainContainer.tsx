@@ -7,9 +7,9 @@ import {
   useContext,
 } from "react";
 import MainView from "./MainView";
-import ModalMainContainer from "../../Components/Modals/ModalAdd/ModalMainContainer";
+import { useNavigate } from "react-router";
 import ModalMainView from "../../Components/Modals/ModalAdd/ModalMainView";
-import { ICurrency, IPageNumber } from "../../Types/types";
+import { ICurrency, IPageNumber, defaultCoin } from "../../Types/types";
 import {
   getData,
   getTopThreeCoins,
@@ -18,22 +18,13 @@ import {
 import { MainContext } from "../../Context/Context";
 import ReactPaginate from "react-paginate";
 import PaginationContainer from "../../Components/Pagination/PaginationContainer";
-//import { MainGlobalContext,useGlobalContext } from "../../Context/Context";
-//import { CoinContext } from "../../Context/Context";
-//import { PortfolioModalContext } from "../../Components/Modals/ModalPortfolio/ModalHeaderContainer";
-
-export const MyContext = createContext("def");
 
 const MainContainer = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [modalMainIsActive, setModalMainIsActive] = useState<boolean>(false);
+  let [modalMainIsActive, setModalMainIsActive] = useState<boolean>(false);
   const [coins, setCoins] = useState<Array<ICurrency>>([]);
+  const [certainCoin, setCertainCoin] = useState<ICurrency>(defaultCoin);
   const limit = 10;
-
-  const buttonAddHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("Add");
-    setModalMainIsActive(!modalMainIsActive);
-  };
 
   useEffect(() => {
     const fetchCoins = async () => {
@@ -43,17 +34,24 @@ const MainContainer = () => {
     fetchCoins();
   }, []);
 
+  const addHandler = (coin: ICurrency) => {
+    setCertainCoin(coin);
+    console.log("Its id", coin.id);
+    setModalMainIsActive(!modalMainIsActive);
+  };
+
+
   return (
     <div>
-      {/* <MainContext.Provider value={coins}> */}
-      {/* <ModalMainView isActive={modalMainIsActive} /> */}
       <MainView
         modalMainIsActive={modalMainIsActive}
         coins={coins}
-        buttonAddHendler={buttonAddHandler}
+        setModalMainIsActive={setModalMainIsActive}
+        setCertainCoin={setCertainCoin}
+        addHandler={addHandler}
+        certainCoin={certainCoin}
       />
       <PaginationContainer />
-      {/* </MainContext.Provider> */}
     </div>
   );
 };

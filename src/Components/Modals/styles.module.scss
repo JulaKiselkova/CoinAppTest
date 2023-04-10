@@ -15,11 +15,16 @@ $borderFocus: #6a64f1;
   align-items: center;
   justify-content: center;
   padding: 48px;
-  width: 50%;
+  width: 30%;
   margin: 0 auto;
   border: 1px solid $borderColor;
   border-radius: 10px;
   background-color: $backgroundModalColor;
+}
+
+.title {
+  margin: 0 auto;
+  flex-flow: column wrap;
 }
 
 .box_wrapper {
