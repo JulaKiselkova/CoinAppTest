@@ -37,9 +37,7 @@ export const defaultCoin: ICurrency = {
 };
 
 export interface GlobalContent {
-  addModalIsActive: boolean;
   test: string;
-  //setCopy: (c: string) => void;
 }
 
 export interface Action {
@@ -48,6 +46,17 @@ export interface Action {
 }
 
 export interface AppContext {
-  state: GlobalContent;
-  dispatch: React.Dispatch<any>;
+  certainCoin: ICurrency;
+  offset: number;
+  listOfCoins: ICurrency[];
+  test: string;
+}
+
+export interface ModalContextType {
+  addModalIsActive: boolean;
+  closeHandler: () => void;
+}
+
+export interface PortfolioContextType {
+  coinPortfolioList: ICurrency[];
 }

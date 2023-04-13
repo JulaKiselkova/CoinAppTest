@@ -4,19 +4,19 @@ import MainContainer from "./Pages/Main/MainContainer";
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./Routes/routes";
 import { MainContext } from "./Context/Context";
-import { GlobalContent } from "./Types/types";
-import { MainReducer } from "./Reducer/MainReducer";
+import { GlobalContent, defaultCoin, AppContext } from "./Types/types";
 
 function App() {
-  const contentInitial: GlobalContent = {
-    addModalIsActive: true,
+  const contentInitial: AppContext = {
+    certainCoin: defaultCoin,
+    offset: 0,
+    listOfCoins: [],
     test: "Hi im from App",
   };
 
-  const [state, dispatch] = useReducer(MainReducer, contentInitial);
   return (
     <div className="App">
-      <MainContext.Provider value={{ state, dispatch }}>
+      <MainContext.Provider value={contentInitial}>
         <BrowserRouter>
           <HeaderContainer />
           <Router />

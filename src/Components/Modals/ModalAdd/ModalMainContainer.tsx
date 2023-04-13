@@ -1,7 +1,8 @@
 import { useState, useCallback, memo, useContext } from "react";
 import ModalMainView from "./ModalMainView";
 import { ICurrency } from "../../../Types/types";
-import { MainContext} from "../../../Context/Context";
+import { MainContext } from "../../../Context/Context";
+import { ModalContext } from "../../../Context/AddModalContext";
 
 type AddProps = {
   isActive: boolean;
@@ -9,17 +10,17 @@ type AddProps = {
 };
 
 const ModalMainViewContainer = (props: AddProps) => {
-  const MyContext = useContext(MainContext);
+  const ModalContextConsumer = useContext(ModalContext);
+
   const [value, setValue] = useState<number>(0);
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(
+    ModalContextConsumer.addModalIsActive
+  );
   const [id, setId] = useState<number>(0);
 
-  console.log(MyContext.state);
-
   const buttonCloseHandler = () => {
-    if (props.isActive) {
-      console.log("close");
-      setIsActive(false);
+    if (ModalContextConsumer.addModalIsActive) {
+      setIsActive(!ModalContextConsumer.addModalIsActive);
     }
   };
 
@@ -36,11 +37,11 @@ const ModalMainViewContainer = (props: AddProps) => {
 
   return (
     <ModalMainView
-      isActive={props.isActive}
+      isActive={ModalContextConsumer.addModalIsActive}
       value={value}
       onChange={handleChange}
       onSubmit={handleFormSubmit}
-      buttonCloseHandler={buttonCloseHandler}
+      buttonCloseHandler={ModalContextConsumer.closeHandler}
       coin={props.coin}
     />
   );

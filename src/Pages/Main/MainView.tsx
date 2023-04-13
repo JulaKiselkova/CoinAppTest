@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import ModalMainView from "../../Components/Modals/ModalAdd/ModalMainView";
 import ModalMainContainer from "../../Components/Modals/ModalAdd/ModalMainContainer";
 
+
 type MainProps = {
   modalMainIsActive: boolean;
   coins: ICurrency[];

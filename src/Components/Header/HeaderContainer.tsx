@@ -1,20 +1,25 @@
-import { createContext } from "react";
-import { useState, memo, useEffect } from "react";
+import { useState, memo, useEffect, useContext } from "react";
 import HeaderView from "./HeaderView";
 import ModalHeaderView from "../Modals/ModalPortfolio/ModalHeaderView";
 import ModalHeaderContainer from "../Modals/ModalPortfolio/ModalHeaderContainer";
-import { ICurrency } from "../../Types/types";
+import {
+  ICurrency,
+  defaultCoin,
+  PortfolioContextType,
+} from "../../Types/types";
 import { getTopThreeCoins } from "../../DataFetching/getData";
+import { PortfolioContext } from "../../Context/PortfolioContext";
 
 const HeaderContainer = () => {
   const [modalHeaderIsActive, setModalHeaderIsActive] =
     useState<boolean>(false);
   const [topThreeCoins, setTopThreeCoins] = useState<Array<ICurrency>>([]);
 
+  const [coinList, setCoinList] = useState<ICurrency[]>([defaultCoin]); // по умоланию по хорошему с local storage надо считывать
+  const PortfolioContextProvider = useContext(PortfolioContext);
   const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setModalHeaderIsActive(!modalHeaderIsActive);
-    console.log(!modalHeaderIsActive);
   };
 
   const buttonDeleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,14 +35,20 @@ const HeaderContainer = () => {
     fetchCoins();
   }, []);
 
+  const content: PortfolioContextType = {
+    coinPortfolioList: coinList,
+  };
+
   return (
     <div>
-      <ModalHeaderContainer isActive={modalHeaderIsActive} />
-      <HeaderView
-        modalHeaderIsActive={modalHeaderIsActive}
-        buttonHandler={buttonHandler}
-        topThree={topThreeCoins}
-      />
+      <PortfolioContext.Provider value={content}>
+        <ModalHeaderContainer isActive={modalHeaderIsActive} />
+        <HeaderView
+          modalHeaderIsActive={modalHeaderIsActive}
+          buttonHandler={buttonHandler}
+          topThree={topThreeCoins}
+        />
+      </PortfolioContext.Provider>
     </div>
   );
 };

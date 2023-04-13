@@ -13,7 +13,7 @@ import MainContainer from "../Pages/Main/MainContainer";
 import InfoContainer from "../Pages/Info/InfoContainer";
 import { useNavigate } from "react-router-dom";
 import { defaultCoin, GlobalContent, AppContext } from "../Types/types";
-import { MainContext, MainContext2 } from "../Context/Context";
+import { MainContext } from "../Context/Context";
 import { MainReducer } from "../Reducer/MainReducer";
 import { MainAction } from "../Action/action";
 
@@ -22,7 +22,8 @@ export const Router = () => {
   console.log(coinName);
   const navigate = useNavigate();
   navigate(0);
-
+  const contextConsumer = useContext(MainContext);
+  console.log(contextConsumer.test);
   return (
     <Routes>
       <Route path={ROUTE_NAMES.HOME_PAGE} element={<MainContainer />} />
