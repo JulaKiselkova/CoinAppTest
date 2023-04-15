@@ -1,3 +1,6 @@
+$borderFocus: #6a64f1;
+$mark: #64f1af;
+
 .item {
   align-items: center;
   color: #fff;
@@ -10,13 +13,14 @@
 }
 
 .disabled_page {
+  display: none;
   color: #808e9b;
 }
 
 .active {
-  border: solid 1px #808e9b;
+  border: solid 1px $mark;
   border-radius: 40px;
-  color: #808e9b;
+  color: $mark;
 }
 
 .next {
@@ -26,18 +30,18 @@
   position: absolute;
   right: 0;
   width: 150px;
+  cursor: pointer;
 }
 
 .pagination {
   align-items: center;
-  background-color: #0fbcf9;
+  background-color: $borderFocus;
   display: flex;
   flex-direction: row;
   height: 60px;
   justify-content: center;
   list-style-type: none;
   position: relative;
-  width: 1000px;
 }
 
 .pagination_page {
@@ -51,4 +55,5 @@
   left: 0;
   position: absolute;
   width: 150px;
+  cursor: pointer;
 }

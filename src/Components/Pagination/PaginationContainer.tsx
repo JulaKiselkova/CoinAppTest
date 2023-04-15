@@ -3,8 +3,6 @@ import styles from "./styles.module.scss";
 import ReactPaginate from "react-paginate";
 import { BASE_URL, getData, getDataPaginate } from "../../DataFetching/getData";
 import { ICurrency, IPageNumber } from "../../Types/types";
-import Pagination from "@mui/material/Pagination";
-import { redirect } from "react-router-dom";
 import { MainContext } from "../../Context/Context";
 
 type PaginationProps = {

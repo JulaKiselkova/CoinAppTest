@@ -17,7 +17,6 @@ type ModalAddProps = {
 
 const ModalMainView = (props: ModalAddProps) => {
   const MyContext = useContext(MainContext);
-  //console.log(MyContext);
   return (
     <form onSubmit={props.onSubmit}>
       <div className={props.isActive ? styles.main_wrapper : styles.hidden}>
@@ -30,13 +29,6 @@ const ModalMainView = (props: ModalAddProps) => {
         >
           Close
         </Button>
-        <Button
-          onClick={() =>
-            MyContext.dispatch({ type: MainAction.AddClick, payload: 5 })
-          }
-        >
-          {MyContext.state.test}
-        </Button>
         <div className={styles.box_wrapper}>
           <div className={styles.item}>
             <input
@@ -46,10 +38,7 @@ const ModalMainView = (props: ModalAddProps) => {
               value={props.value}
               onChange={props.onChange}
             />
-            <button
-              className={styles.formbold_btn}
-              type="submit"
-            >
+            <button className={styles.formbold_btn} type="submit">
               Add
             </button>
           </div>

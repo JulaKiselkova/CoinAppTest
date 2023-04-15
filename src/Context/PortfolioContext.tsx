@@ -4,12 +4,10 @@ import {
   GlobalContent,
   AppContext,
   defaultCoin,
+  PortfolioContextType
 } from "../Types/types";
 import { getData, getDataPaginate, firstCoins } from "../DataFetching/getData";
 
-export const MainContext = createContext<AppContext>({
-  certainCoin: defaultCoin,
-  offset: 0,
-  listOfCoins: [],
-  test: "without provider",
+export const PortfolioContext2 = createContext<PortfolioContextType>({
+  coinPortfolioList: [],
 });

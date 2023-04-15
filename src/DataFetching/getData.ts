@@ -1,8 +1,9 @@
 import { useState, useCallback, memo, useEffect } from "react";
 import axios from "axios";
-import { ICurrency } from "../Types/types";
+import { ICurrency, IHistoryData } from "../Types/types";
 
 export const BASE_URL = `https://api.coincap.io/v2/assets?`;
+export const URL = `https://api.coincap.io/v2/assets`;
 
 export const getData = async (limit: number) => {
   const res = await fetch(`${BASE_URL}limit=${limit}`);
@@ -27,4 +28,12 @@ export const firstCoins = async (num: number) => {
   const res: Array<ICurrency> = await getDataPaginate(num, 10);
   //console.log(res);
   return res;
+};
+
+export const handleGetCurrencyHistory = async (
+  id: string
+): Promise<IHistoryData[]> => {
+    const res = await fetch(`${URL}/${id}/history?interval=d1`);
+    const data = await res.json();
+  return data.data;
 };
