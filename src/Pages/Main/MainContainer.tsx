@@ -38,7 +38,7 @@ const MainContainer = () => {
       setCoins(res);
     };
     fetchCoins();
-  }, []);
+  }, []); // через пропсы и избавиться от бибилиотеки + типизация функций
 
   const addHandler = (coin: ICurrency) => {
     setCertainCoin(coin);

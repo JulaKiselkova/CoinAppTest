@@ -8,6 +8,6 @@ import {
 } from "../Types/types";
 import { getData, getDataPaginate, firstCoins } from "../DataFetching/getData";
 
-export const PortfolioContext = createContext<PortfolioContextType>({
+export const PortfolioContext2 = createContext<PortfolioContextType>({
   coinPortfolioList: [],
 });

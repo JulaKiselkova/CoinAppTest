@@ -1,6 +1,6 @@
 import { useState, useCallback, memo, useContext } from "react";
 import ModalMainView from "./ModalMainView";
-import { ICurrency } from "../../../Types/types";
+import { ICurrency, LocalStorageContent } from "../../../Types/types";
 import { MainContext } from "../../../Context/Context";
 import { ModalContext } from "../../../Context/AddModalContext";
 
@@ -29,9 +29,13 @@ const ModalMainViewContainer = (props: AddProps) => {
   };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const resultValue: LocalStorageContent = {
+      coin: props.coin,
+      value: value,
+    };
     console.log(value);
     event.preventDefault();
-    localStorage.setItem(`${props.coin.name}Value`, String(value));
+    localStorage.setItem(`${props.coin.id}`, JSON.stringify(resultValue));
     setIsActive(false);
   };
 
