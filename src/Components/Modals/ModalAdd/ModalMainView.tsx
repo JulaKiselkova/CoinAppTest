@@ -3,8 +3,6 @@ import styles from "../styles.module.scss";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ICurrency } from "../../../Types/types";
-import { MainContext } from "../../../Context/Context";
-import { MainAction } from "../../../Action/action";
 
 type ModalAddProps = {
   isActive: boolean;
@@ -16,7 +14,6 @@ type ModalAddProps = {
 };
 
 const ModalMainView = (props: ModalAddProps) => {
-  const MyContext = useContext(MainContext);
   return (
     <form onSubmit={props.onSubmit}>
       <div className={props.isActive ? styles.main_wrapper : styles.hidden}>
