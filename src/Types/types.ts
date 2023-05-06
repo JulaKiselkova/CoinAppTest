@@ -18,26 +18,13 @@ export interface IPageNumber {
   selected: number;
 }
 
+export type FetchDataPagination = () => Promise<IPageNumber>;
+
 export interface IHistoryData {
   priceUsd: string;
   time: string;
+  date: string;
 }
-
-export const testCoin: ICurrency = {
-  changePercent24Hr: "-0.6052872453115864",
-  explorer: "http://explorer.litecoin.net/chain/Litecoin",
-  id: "litecoin",
-  marketCapUsd: 7027086779.475780778264933,
-  maxSupply: 84000000.0,
-  name: "Litecoin",
-  priceUsd: 96.6462580601065281,
-  rank: 12,
-  supply: "72709351.8210035000000000",
-  symbol: "LTC",
-  volumeUsd24Hr: 215509825.8556342028115153,
-  vwap24Hr: 95.933801300263801,
-  count: 777,
-};
 
 export const defaultCoin: ICurrency = {
   changePercent24Hr: "test",
@@ -66,21 +53,38 @@ export interface PortfolioContent {
 }
 
 export interface LocalStorageCoin {
-  coin: ICurrency;
+  coin?: ICurrency;
   value: number;
   totalPrice: number;
 }
 
+export interface PortfolioInfo {
+  difference: number;
+  percent: number;
+  sign: string;
+}
+
 export interface PortfolioContextType {
   localStorageContent: PortfolioContent;
-  deleteHandler: (coin: ICurrency) => void;
+  deleteHandler: (coin: LocalStorageCoin) => void;
+  setLocalStorageContent: (content: PortfolioContent) => void;
+  handlePortfolioContext: (coin: ICurrency, value: number) => void;
+  portfolioTotalPrice: number;
+  portfolioInfo: PortfolioInfo;
 }
 
 export interface MainContextType {
-  certainCoin: ICurrency;
+  certainCoin?: ICurrency;
   addHandler: (coin: ICurrency) => void;
-  closeHandler: any;
-  infoHandler: any;
+  closeHandler: () => void;
   addModalIsActive: boolean;
-  certainCoinShow: ICurrency;
+}
+
+export interface PaginationData {
+  totalPages: number;
+  onClick: (data: IPageNumber) => Promise<ICurrency[]>;
+}
+
+export interface InfoPageRouteParams {
+  id: string;
 }

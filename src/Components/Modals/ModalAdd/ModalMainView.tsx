@@ -1,8 +1,8 @@
-import { memo, useContext } from "react";
-import styles from "../styles.module.scss";
+import { memo } from "react";
+
 import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { ICurrency } from "../../../Types/types";
+import styles from "../styles.module.scss";
 
 type ModalAddProps = {
   isActive: boolean;
@@ -13,35 +13,44 @@ type ModalAddProps = {
   coin: ICurrency;
 };
 
-const ModalMainView = (props: ModalAddProps) => {
+const ModalMainView = ({
+  isActive,
+  buttonCloseHandler,
+  value,
+  onChange,
+  onSubmit,
+  coin,
+}: ModalAddProps) => {
   return (
-    <form onSubmit={props.onSubmit}>
-      <div className={props.isActive ? styles.main_wrapper : styles.hidden}>
-        <p className={styles.title}>Add {props.coin.name}</p>
-        <Button
-          className="btn"
-          variant="contained"
-          color="error"
-          onClick={props.buttonCloseHandler}
-        >
-          Close
-        </Button>
-        <div className={styles.box_wrapper}>
-          <div className={styles.item}>
-            <input
-              type="number"
-              name="amount"
-              step="any"
-              value={props.value}
-              onChange={props.onChange}
-            />
-            <button className={styles.formbold_btn} type="submit">
-              Add
-            </button>
+    <div className={styles.area}>
+      <form onSubmit={onSubmit}>
+        <div className={isActive ? styles.main_wrapper : styles.hidden}>
+          <p className={styles.title}>Add {coin.name}</p>
+          <Button
+            className={styles.close}
+            variant="contained"
+            color="error"
+            onClick={buttonCloseHandler}
+          >
+            Close
+          </Button>
+          <div className={styles.box_wrapper}>
+            <div className={styles.item}>
+              <input
+                type="number"
+                name="amount"
+                step="any"
+                value={value}
+                onChange={onChange}
+              />
+              <button className={styles.formbold_btn} type="submit">
+                Add
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

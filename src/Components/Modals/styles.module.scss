@@ -15,7 +15,7 @@ $borderFocus: #6a64f1;
   align-items: center;
   justify-content: center;
   padding: 48px;
-  width: 30%;
+  width: 50%;
   margin: 0 auto;
   border: 1px solid $borderColor;
   border-radius: 10px;
@@ -55,6 +55,15 @@ $borderFocus: #6a64f1;
   flex-flow: row;
   gap: 15px;
   $borderFillColor: #dde3ec;
+}
+
+.close {
+  cursor: pointer;
+  height: 26px;
+  border-top: px solid #000;
+  position: absolute;
+  bottom: 55px;
+  right: 60px;
 }
 
 .formbold_btn {

@@ -1,68 +1,30 @@
-import { useState, useCallback, memo, useContext } from "react";
-import ModalMainView from "./ModalMainView";
-import {
-  ICurrency,
-  LocalStorageCoin,
-  PortfolioContent,
-} from "../../../Types/types";
-//import { MainContext } from "../../../Context/Context";
-import { ModalContext } from "../../../Context/AddModalContext";
+import { FormEvent, memo, useState } from "react";
+
 import { useMainContext } from "../../../Context/Context";
 import { usePortfolioContext } from "../../../Context/PortContext";
+import { ICurrency } from "../../../Types/types";
+import ModalMainView from "./ModalMainView";
 
 type AddProps = {
   isActive: boolean;
   coin: ICurrency;
 };
 
-const KEY = "MyPortfolio";
-
-const ModalMainViewContainer = (props: AddProps) => {
-  const PortfolioContext = usePortfolioContext();
+const ModalAddContainer = ({ coin }: AddProps) => {
+  const { handlePortfolioContext } = usePortfolioContext();
   const MainContext = useMainContext();
 
-  const ModalContextConsumer = useContext(ModalContext);
-  //const [isEmpty, setIsEmpty] = useState<boolean>(false);
-
   const [value, setValue] = useState<number>(0);
-  let [portfolio, setPortfolio] = useState<LocalStorageCoin[] | null>([]);
 
-  const [previousPortfolioPrice, setPortfolioPrice] = useState<number>(0);
-  const [isActive, setIsActive] = useState<boolean>(
-    ModalContextConsumer.addModalIsActive
-  );
-  const buttonCloseHandler = () => {
-    if (ModalContextConsumer.addModalIsActive) {
-      setIsActive(!ModalContextConsumer.addModalIsActive);
+  const handleChange = (event: FormEvent<HTMLInputElement>) => {
+    if (Number(event.currentTarget.value) > 0) {
+      setValue(Number(event.currentTarget.value));
     }
   };
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    setValue(Number(event.currentTarget.value));
-  };
-
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log(23, PortfolioContext.localStorageContent);
-    const currentCoin: LocalStorageCoin = {
-      coin: props.coin,
-      value: value,
-      totalPrice: value * props.coin.priceUsd,
-    };
-
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    let arrOfAddedCoins = PortfolioContext.localStorageContent?.coins;
-    arrOfAddedCoins.push(currentCoin);
-
-    const currentLSValue: PortfolioContent = {
-      coins: arrOfAddedCoins,
-      portfolioPrice: 0,
-    };
-
-    console.log("Full portfolio", currentLSValue);
-    localStorage.setItem(KEY, JSON.stringify(currentLSValue));
-
-    console.log("Current value", currentCoin);
+    handlePortfolioContext(coin, value);
   };
 
   return (
@@ -72,9 +34,9 @@ const ModalMainViewContainer = (props: AddProps) => {
       onChange={handleChange}
       onSubmit={handleFormSubmit}
       buttonCloseHandler={MainContext.closeHandler}
-      coin={props.coin}
+      coin={coin}
     />
   );
 };
 
-export default memo(ModalMainViewContainer);
+export default memo(ModalAddContainer);

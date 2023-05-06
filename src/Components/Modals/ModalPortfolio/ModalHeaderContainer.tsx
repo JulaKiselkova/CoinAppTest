@@ -1,28 +1,21 @@
-import { useState, memo, useContext } from "react";
-import { ICurrency, LocalStorageCoin } from "../../../Types/types";
-import ModalHeaderView from "./ModalHeaderView";
+import { memo } from "react";
+
 import { usePortfolioContext } from "../../../Context/PortContext";
+import ModalHeaderView from "./ModalHeaderView";
 
 type ModalProps = {
   isActive: boolean;
 };
 
 const ModalHeaderViewContainer = (props: ModalProps) => {
-  const PortfolioContext = usePortfolioContext();
-
-  const [coinName, setCoinName] = useState<string>("");
-  const [portfolioList, setPortfolioList] = useState<LocalStorageCoin[]>([]);
-
-  const buttonDeleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log("delete FROM Modal");
-  };
+  const { localStorageContent, deleteHandler } = usePortfolioContext();
 
   return (
     <ModalHeaderView
       isActive={props.isActive}
-      buttonDeleteHandler={PortfolioContext.deleteHandler}
-      portfolioCoins={PortfolioContext.localStorageContent.coins}
+      buttonDeleteHandler={deleteHandler}
+      portfolioCoins={localStorageContent.coins}
+      portfolioPrice={localStorageContent.portfolioPrice}
     />
   );
 };

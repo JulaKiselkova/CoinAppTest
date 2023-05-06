@@ -1,42 +1,50 @@
-import { useState, useCallback, useEffect, memo } from "react";
-import ModalMainView from "./InfoView";
-import { ICurrency, testCoin, IHistoryData } from "../../Types/types";
-import { handleGetCurrencyHistory } from "../../DataFetching/getData";
+import { ReactElement, memo, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import Loader from "../../Components/Loader/Loader";
+import ModalAddContainer from "../../Components/Modals/ModalAdd/ModalMainContainer";
 import { useMainContext } from "../../Context/Context";
+import { getById, getCoinHistory } from "../../Services/services";
+import { ICurrency, IHistoryData, defaultCoin } from "../../Types/types";
+import InfoView from "./InfoView";
 
-type InfoProps = {
-  coin: ICurrency;
-};
+const InfoContainer = (): ReactElement => {
+  const params = useParams<{ id: string }>();
+  const [coin, setCoin] = useState<ICurrency>(defaultCoin);
+  const [history, setHistory] = useState<IHistoryData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-const InfoContainer = (props: InfoProps) => {
-  const context = useMainContext();
-  const [currentHistory, setCurrentHistory] = useState<IHistoryData[]>([]);
+  const { addModalIsActive, addHandler, certainCoin } = useMainContext();
 
-  const handleGenerateCurrencyHistoryData = (data: IHistoryData[]) =>
-    data.map((item) => {
-      const currentItemDate = new Date(item.time);
-      const numberDays = currentItemDate.getDate();
-      const numberMonths = currentItemDate.getMonth();
-      const currentYear = currentItemDate.getFullYear();
-
-      return {
-        ...item,
-        time: `${numberDays}.${numberMonths}.${currentYear}`,
-      };
-    });
-
-  const handleLoadCurrencyHistory = async () => {
-    const history = await handleGetCurrencyHistory(props.coin?.id);
-    //const history = await handleGetCurrencyHistory(context.certainCoinShow?.id);
-    setCurrentHistory(handleGenerateCurrencyHistoryData(history));
+  const getData = async () => {
+    try {
+      if (params.id) {
+        const coinHistory = await getCoinHistory(params.id);
+        const coinData: ICurrency = await getById(params.id);
+        setCoin(coinData);
+        setHistory(coinHistory);
+      }
+    } catch (error) {
+      console.log("Error");
+    } finally {
+      setLoading(false);
+    }
   };
+
   useEffect(() => {
-    handleLoadCurrencyHistory();
+    getData();
   }, []);
 
-  console.log(context.certainCoinShow);
-
-  return <ModalMainView coin={props.coin} history={currentHistory} />;
+  return (
+    <div>
+      <ModalAddContainer isActive={true} coin={coin} />
+      {loading ? (
+        <Loader />
+      ) : (
+        <InfoView coin={coin} history={history} addHandler={addHandler} />
+      )}
+    </div>
+  );
 };
 
 export default memo(InfoContainer);

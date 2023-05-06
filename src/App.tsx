@@ -1,12 +1,8 @@
-import { createContext, useReducer } from "react";
-import HeaderContainer from "./Components/Header/HeaderContainer";
-import MainContainer from "./Pages/Main/MainContainer";
 import { BrowserRouter } from "react-router-dom";
-import { Router } from "./Routes/routes";
-//import { MainContext } from "./Context/Context";
-import { defaultCoin} from "./Types/types";
-import { PortfolioContextProvider } from "./Context/PortContext";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 import { MainContextProvider } from "./Context/Context";
+import { PortfolioContextProvider } from "./Context/PortContext";
+import { Router } from "./Routes/routes";
 
 function App() {
   return (

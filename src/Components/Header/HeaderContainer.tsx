@@ -1,34 +1,21 @@
-import { useState, memo, useEffect, useContext } from "react";
-import HeaderView from "./HeaderView";
-import ModalHeaderView from "../Modals/ModalPortfolio/ModalHeaderView";
+import { memo, useEffect, useState } from "react";
+
+import { usePortfolioContext } from "../../Context/PortContext";
+import { getTopThreeCoins } from "../../Services/services";
+import { ICurrency } from "../../Types/types";
 import ModalHeaderContainer from "../Modals/ModalPortfolio/ModalHeaderContainer";
-import {
-  ICurrency,
-  defaultCoin,
-  PortfolioContextType,
-  testCoin,
-} from "../../Types/types";
-import { getTopThreeCoins } from "../../DataFetching/getData";
-import {
-  PortfolioContextProvider,
-  usePortfolioContext,
-} from "../../Context/PortContext";
+import HeaderView from "./HeaderView";
 
 const HeaderContainer = () => {
   const [modalHeaderIsActive, setModalHeaderIsActive] =
     useState<boolean>(false);
   const [topThreeCoins, setTopThreeCoins] = useState<Array<ICurrency>>([]);
-
-  const [coinList, setCoinList] = useState<ICurrency[]>([testCoin]);
+  const { localStorageContent, deleteHandler, portfolioInfo} =
+    usePortfolioContext();
 
   const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setModalHeaderIsActive(!modalHeaderIsActive);
-  };
-
-  const buttonDeleteHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log("DeleteFROM HEADER");
   };
 
   useEffect(() => {
@@ -46,6 +33,8 @@ const HeaderContainer = () => {
         modalHeaderIsActive={modalHeaderIsActive}
         buttonHandler={buttonHandler}
         topThree={topThreeCoins}
+        portfolioPrice={localStorageContent.portfolioPrice}
+        portfolioInfo={portfolioInfo}
       />
     </div>
   );

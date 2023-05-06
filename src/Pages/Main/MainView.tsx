@@ -1,43 +1,49 @@
-import { useState, useCallback, useEffect, memo } from "react";
-import styles from "./styles.module.scss";
-import { ICurrency } from "../../Types/types";
+import { memo } from "react";
 import { Link } from "react-router-dom";
+
 import ModalMainContainer from "../../Components/Modals/ModalAdd/ModalMainContainer";
+import { ICurrency } from "../../Types/types";
+import styles from "./styles.module.scss";
 
 type MainProps = {
   modalMainIsActive: boolean;
   coins: ICurrency[];
-  setModalMainIsActive: (isActive: boolean) => void;
   addHandler: (coin: ICurrency) => void;
-  certainCoin: ICurrency;
-  setCertainCoin: (coin: ICurrency) => void;
+  certainCoin?: ICurrency;
 };
 
-const MainView = (props: MainProps) => {
+const MainView = ({
+  modalMainIsActive,
+  coins,
+  addHandler,
+  certainCoin,
+}: MainProps) => {
   return (
     <div>
       <div className={styles.main_wrapper}>
         <div className={styles.box_wrapper}>
-          <ModalMainContainer
-            isActive={props.modalMainIsActive}
-            coin={props.certainCoin}
-          />
-          {props.coins.map((coin: ICurrency) => (
+          {certainCoin && (
+            <ModalMainContainer
+              isActive={modalMainIsActive}
+              coin={certainCoin}
+            />
+          )}
+          {coins.map((coin: ICurrency) => (
             <div key={coin.id} className={styles.item}>
               <div className={styles.infoBox}>
-                <Link className={styles.name} to={`/${coin.name}`}>
+                <Link className={styles.name} to={`/${coin.id}`}>
                   {coin.name}
                 </Link>
                 <p className={styles.info}>
-                  {coin.priceUsd} $ {coin.rank}
+                  {Number(coin.priceUsd).toFixed(2)} USD
                 </p>
               </div>
               <button
-                onClick={() => props.addHandler(coin)}
+                onClick={() => addHandler(coin)}
                 className={styles.formbold_btn}
               >
                 {"Add "}
-                {props.certainCoin.name}
+                {certainCoin?.name}
               </button>
             </div>
           ))}

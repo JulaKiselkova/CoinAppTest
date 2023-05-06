@@ -1,49 +1,29 @@
-import {
-  useState,
-  useEffect,
-  memo,
-} from "react";
-import MainView from "./MainView";
-import {
-  ICurrency,
-  defaultCoin,
-} from "../../Types/types";
-import {
-  getData,
-  getTopThreeCoins,
-  getDataPaginate,
-} from "../../DataFetching/getData";
-import PaginationContainer from "../../Components/Pagination/PaginationContainer";
+import { memo } from "react";
+import Loader from "../../Components/Loader/Loader";
+import Pagination from "../../Components/Pagination/Pagination";
 import { useMainContext } from "../../Context/Context";
+import { usePaginate } from "../../Hooks/usePaginate";
+import MainView from "./MainView";
 
 const MainContainer = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  let [modalMainIsActive, setModalMainIsActive] = useState<boolean>(false);
-  const [coins, setCoins] = useState<Array<ICurrency>>([]);
-  const [certainCoin, setCertainCoin] = useState<ICurrency>(defaultCoin);
-  const limit = 10;
-
-  const MainContext = useMainContext();
-
-  useEffect(() => {
-    const fetchCoins = async () => {
-      const res: Array<ICurrency> = await getData(limit);
-      setCoins(res);
-    };
-    fetchCoins();
-  }, []); 
+  const { addModalIsActive, addHandler, certainCoin } = useMainContext();
+  const paginationData = usePaginate();
 
   return (
     <div>
-      <MainView
-        modalMainIsActive={MainContext.addModalIsActive}
-        coins={coins}
-        setModalMainIsActive={setModalMainIsActive}
-        setCertainCoin={setCertainCoin}
-        addHandler={MainContext.addHandler}
-        certainCoin={MainContext.certainCoin}
-      />
-      <PaginationContainer />
+      {paginationData.loading ? (
+        <Loader />
+      ) : (
+        <>
+          <MainView
+            modalMainIsActive={addModalIsActive}
+            coins={paginationData.currentList}
+            addHandler={addHandler}
+            certainCoin={certainCoin}
+          />
+          <Pagination {...paginationData} />
+        </>
+      )}
     </div>
   );
 };

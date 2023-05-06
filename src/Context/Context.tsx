@@ -1,12 +1,5 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
-import {
-  ICurrency,
-  defaultCoin,
-  testCoin,
-  LocalStorageCoin,
-  PortfolioContent,
-  MainContextType,
-} from "../Types/types";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { ICurrency, MainContextType } from "../Types/types";
 
 type ContextProvider = ReturnType<typeof Context.Provider>;
 
@@ -27,8 +20,7 @@ export const useMainContext = (): MainContextType => {
 export const MainContextProvider = ({
   children,
 }: MainContextProps): ContextProvider => {
-  const [certainCoin, setCertainCoin] = useState<ICurrency>(defaultCoin);
-  const [certainCoinShow, setCertainCoinShow] = useState<ICurrency>(testCoin);
+  const [certainCoin, setCertainCoin] = useState<ICurrency | undefined>();
   const [modalMainIsActive, setModalMainIsActive] = useState<boolean>(false);
 
   const addHandler = (coin: ICurrency) => {
@@ -40,17 +32,11 @@ export const MainContextProvider = ({
     setModalMainIsActive(false);
   };
 
-  const infoHandler = (coin: ICurrency) => {
-    setCertainCoinShow(coin);
-  };
-
   const value: MainContextType = {
     certainCoin: certainCoin,
     addHandler: addHandler,
     closeHandler: closeHandler,
-    infoHandler: infoHandler,
     addModalIsActive: modalMainIsActive,
-    certainCoinShow: certainCoinShow,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

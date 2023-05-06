@@ -1,28 +1,43 @@
-import { useState, useCallback, memo } from "react";
+import { memo } from "react";
+
+import { ICurrency, PortfolioInfo } from "../../Types/types";
 import styles from "./styles.module.scss";
-import { ICurrency } from "../../Types/types";
 
 type HeaderProps = {
   topThree: Array<ICurrency>;
   modalHeaderIsActive: boolean;
   buttonHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  portfolioPrice: number;
+  portfolioInfo: PortfolioInfo;
 };
 
-const HeaderView = (props: HeaderProps) => {
+const HeaderView = ({
+  topThree,
+  buttonHandler,
+  portfolioPrice,
+  portfolioInfo,
+}: HeaderProps) => {
   return (
     <div className={styles.box}>
       <div className={styles.list}>
-        {props.topThree.map(({ id, name, priceUsd }) => (
+        {topThree.map(({ id, name, priceUsd }) => (
           <div key={id} className={styles.item}>
             <div className={styles.name}>{name}</div>
-            <div className={styles.price}>{priceUsd} $</div>
+            <div className={styles.price}>
+              {Number(priceUsd).toFixed(2)} USD
+            </div>
           </div>
         ))}
       </div>
-      <div>134,32 USD +2,38 (1,80 %)</div>
       <div>
-        <button className={styles.portflio_btn} onClick={props.buttonHandler}>
-          Portflio
+        {Number(portfolioPrice).toFixed(2)} USD
+        {portfolioInfo.sign}
+        {portfolioInfo.difference.toFixed(2)} USD ({portfolioInfo.sign}
+        {portfolioInfo.percent.toFixed(2)} %)
+      </div>
+      <div>
+        <button className={styles.portflio_btn} onClick={buttonHandler}>
+          Portfolio
         </button>
       </div>
     </div>

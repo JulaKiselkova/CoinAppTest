@@ -1,33 +1,50 @@
-import { useState, useCallback, memo } from "react";
-import styles from "./styles.module.scss";
-import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Link } from "react-router-dom";
-import { ICurrency, IHistoryData } from "../../Types/types";
+import { memo } from "react";
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
 } from "recharts";
+import { ICurrency, IHistoryData } from "../../Types/types";
+import styles from "./styles.module.scss";
 
 type InfoProps = {
   coin: ICurrency;
   history: IHistoryData[];
+  addHandler: (coin: ICurrency) => void;
 };
 
-const InfoView = (props: InfoProps) => {
+const InfoView = ({coin, history, addHandler}: InfoProps) => {
   return (
     <>
-      <div>INFO {props.coin.name}</div>
+      <div>INFO {coin.name}</div>
+      <div>
+        <div className="currency-info__details">
+          <p>Symbol : {coin.symbol}</p>
+          <p>
+            Change Percent :{" "}
+            {parseFloat(coin.changePercent24Hr).toFixed(2)}
+          </p>
+          <p>Rank : {coin.rank}</p>
+          <p>PriceUSD : {parseFloat(`${coin.priceUsd}`).toFixed(2)}</p>
+          <p>Supply : {parseFloat(coin.supply).toFixed(2)}</p>
+        </div>
+        <button
+          onClick={() => addHandler(coin)}
+          className={styles.formbold_btn}
+        >
+          {"Buy "}
+          {coin.name}
+        </button>
+      </div>
       <div className="currency-graphic">
         <div style={{ width: "100%", height: 300 }}>
           <ResponsiveContainer>
             <AreaChart
-              data={props.history}
+              data={history}
               margin={{
                 top: 10,
                 right: 30,
@@ -36,7 +53,7 @@ const InfoView = (props: InfoProps) => {
               }}
             >
               <Area dataKey="priceUsd" stroke="#2451B7" />
-              <XAxis dataKey="time" axisLine={false} tickLine={false} />
+              <XAxis dataKey="date" axisLine={false} tickLine={false} />
               <YAxis dataKey="priceUsd" tickLine={false} tickCount={8} />
               <Tooltip />
               <CartesianGrid
