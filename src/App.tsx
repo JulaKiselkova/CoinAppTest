@@ -3,25 +3,22 @@ import HeaderContainer from "./Components/Header/HeaderContainer";
 import MainContainer from "./Pages/Main/MainContainer";
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./Routes/routes";
-import { MainContext } from "./Context/Context";
-import { GlobalContent, defaultCoin, AppContext } from "./Types/types";
+//import { MainContext } from "./Context/Context";
+import { defaultCoin} from "./Types/types";
+import { PortfolioContextProvider } from "./Context/PortContext";
+import { MainContextProvider } from "./Context/Context";
 
 function App() {
-  const contentInitial: AppContext = {
-    certainCoin: defaultCoin,
-    offset: 0,
-    listOfCoins: [],
-    test: "Hi im from App",
-  };
-
   return (
     <div className="App">
-      <MainContext.Provider value={contentInitial}>
-        <BrowserRouter>
-          <HeaderContainer />
-          <Router />
-        </BrowserRouter>
-      </MainContext.Provider>
+      <MainContextProvider>
+        <PortfolioContextProvider>
+          <BrowserRouter>
+            <HeaderContainer />
+            <Router />
+          </BrowserRouter>
+        </PortfolioContextProvider>
+      </MainContextProvider>
     </div>
   );
 }

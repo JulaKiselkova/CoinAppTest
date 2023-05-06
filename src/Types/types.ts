@@ -1,5 +1,3 @@
-import { MainAction } from "../Action/action";
-
 export interface ICurrency {
   changePercent24Hr: string;
   explorer: string;
@@ -16,11 +14,6 @@ export interface ICurrency {
   count: number;
 }
 
-export interface LocalStorageContent {
-  coin: ICurrency;
-  value: number;
-}
-
 export interface IPageNumber {
   selected: number;
 }
@@ -29,9 +22,6 @@ export interface IHistoryData {
   priceUsd: string;
   time: string;
 }
-
-//{"id":"bitcoin","rank":"1","symbol":"BTC","name":"Bitcoin","supply":"19346087.0000000000000000","maxSupply":"21000000.0000000000000000","marketCapUsd":"587088484858.8032143360718020","volumeUsd24Hr":"7110695887.3053974782104358","priceUsd":"30346.6269359174914460","changePercent24Hr":"-0.5461405104600395","vwap24Hr":"30770.0120617154056253","explorer":"https://blockchain.info/"}
-//"litecoin"
 
 export const testCoin: ICurrency = {
   changePercent24Hr: "-0.6052872453115864",
@@ -65,27 +55,32 @@ export const defaultCoin: ICurrency = {
   count: 1,
 };
 
-export interface GlobalContent {
-  test: string;
-}
-
-export interface Action {
-  type: MainAction;
-  payload: number;
-}
-
-export interface AppContext {
-  certainCoin: ICurrency;
-  offset: number;
-  listOfCoins: ICurrency[];
-  test: string;
-}
-
 export interface ModalContextType {
   addModalIsActive: boolean;
   closeHandler: () => void;
 }
 
+export interface PortfolioContent {
+  coins: LocalStorageCoin[];
+  portfolioPrice: number;
+}
+
+export interface LocalStorageCoin {
+  coin: ICurrency;
+  value: number;
+  totalPrice: number;
+}
+
 export interface PortfolioContextType {
-  coinPortfolioList: ICurrency[];
+  localStorageContent: PortfolioContent;
+  deleteHandler: (coin: ICurrency) => void;
+}
+
+export interface MainContextType {
+  certainCoin: ICurrency;
+  addHandler: (coin: ICurrency) => void;
+  closeHandler: any;
+  infoHandler: any;
+  addModalIsActive: boolean;
+  certainCoinShow: ICurrency;
 }

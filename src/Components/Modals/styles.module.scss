@@ -49,7 +49,10 @@ $borderFocus: #6a64f1;
 
 .item {
   margin-top: 10px;
+  margin-top: 10px;
   display: flex;
+  gap: 15px;
+  flex-flow: row;
   gap: 15px;
   $borderFillColor: #dde3ec;
 }

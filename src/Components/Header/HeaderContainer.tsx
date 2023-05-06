@@ -5,10 +5,14 @@ import ModalHeaderContainer from "../Modals/ModalPortfolio/ModalHeaderContainer"
 import {
   ICurrency,
   defaultCoin,
-  PortfolioContextType, testCoin
+  PortfolioContextType,
+  testCoin,
 } from "../../Types/types";
 import { getTopThreeCoins } from "../../DataFetching/getData";
-import { PortfolioContextProvider } from "../../Context/PortContext";
+import {
+  PortfolioContextProvider,
+  usePortfolioContext,
+} from "../../Context/PortContext";
 
 const HeaderContainer = () => {
   const [modalHeaderIsActive, setModalHeaderIsActive] =
@@ -16,7 +20,7 @@ const HeaderContainer = () => {
   const [topThreeCoins, setTopThreeCoins] = useState<Array<ICurrency>>([]);
 
   const [coinList, setCoinList] = useState<ICurrency[]>([testCoin]);
-  //const PortfolioContextProvider = useContext(PortfolioContext);
+
   const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setModalHeaderIsActive(!modalHeaderIsActive);
@@ -35,22 +39,14 @@ const HeaderContainer = () => {
     fetchCoins();
   }, []);
 
-  const content: PortfolioContextType = {
-    coinPortfolioList: coinList,
-  };
-
   return (
     <div>
-      {/* <PortfolioContext.Provider value={content}> */}
-      {/* <PortfolioContextProvider children={0}> */}
-        <ModalHeaderContainer isActive={modalHeaderIsActive} />
-        <HeaderView
-          modalHeaderIsActive={modalHeaderIsActive}
-          buttonHandler={buttonHandler}
-          topThree={topThreeCoins}
-        />
-      {/* </PortfolioContextProvider> */}
-      {/* </PortfolioContext.Provider> */}
+      <ModalHeaderContainer isActive={modalHeaderIsActive} />
+      <HeaderView
+        modalHeaderIsActive={modalHeaderIsActive}
+        buttonHandler={buttonHandler}
+        topThree={topThreeCoins}
+      />
     </div>
   );
 };

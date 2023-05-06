@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import ReactPaginate from "react-paginate";
 import { BASE_URL, getData, getDataPaginate } from "../../DataFetching/getData";
 import { ICurrency, IPageNumber } from "../../Types/types";
-import { MainContext } from "../../Context/Context";
+//import { MainContext } from "../../Context/Context";
 
 type PaginationProps = {
   coins: number;

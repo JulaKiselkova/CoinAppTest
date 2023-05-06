@@ -12,23 +12,13 @@ import { ROUTE_NAMES } from "./routeNames";
 import MainContainer from "../Pages/Main/MainContainer";
 import InfoContainer from "../Pages/Info/InfoContainer";
 import { useNavigate } from "react-router-dom";
-import {
-  defaultCoin,
-  testCoin,
-  GlobalContent,
-  AppContext,
-} from "../Types/types";
-import { MainContext } from "../Context/Context";
-import { MainReducer } from "../Reducer/MainReducer";
-import { MainAction } from "../Action/action";
+import { defaultCoin, testCoin } from "../Types/types";
+import { useMainContext } from "../Context/Context";
 
 export const Router = () => {
+  const MainContext = useMainContext();
   const coinName = window.location.pathname.split("/")[1];
   console.log(coinName);
-  const navigate = useNavigate();
-  navigate(0);
-  const contextConsumer = useContext(MainContext);
-  console.log(contextConsumer.test);
 
   return (
     <Routes>
@@ -38,7 +28,6 @@ export const Router = () => {
         element={
           <div>
             <InfoContainer coin={testCoin} />
-            это коин из ссылки {coinName}, а вверху дефолтный
           </div>
         }
       />

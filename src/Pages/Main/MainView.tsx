@@ -1,11 +1,8 @@
 import { useState, useCallback, useEffect, memo } from "react";
 import styles from "./styles.module.scss";
-import InfoContainer from "../Info/InfoContainer";
 import { ICurrency } from "../../Types/types";
 import { Link } from "react-router-dom";
-import ModalMainView from "../../Components/Modals/ModalAdd/ModalMainView";
 import ModalMainContainer from "../../Components/Modals/ModalAdd/ModalMainContainer";
-
 
 type MainProps = {
   modalMainIsActive: boolean;

@@ -20,13 +20,11 @@ export const getDataPaginate = async (limit: number, offset: number) => {
 export const getTopThreeCoins = async () => {
   const res = await fetch(BASE_URL);
   const data = await res.json();
-  //console.log(data.data.slice(0, 3));
   return data.data.slice(0, 3);
 };
 
 export const firstCoins = async (num: number) => {
   const res: Array<ICurrency> = await getDataPaginate(num, 10);
-  //console.log(res);
   return res;
 };
 
